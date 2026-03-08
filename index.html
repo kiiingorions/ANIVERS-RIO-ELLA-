@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FELIZ ANIVERSÁRIO MACAQUINHA  🐵🎉</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --accent-color: #e94560;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Tela de Boas-vindas */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-color) 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-content { text-align: center; }
+        .welcome-icon { font-size: 5rem; margin-bottom: 30px; animation: bounce 1s ease infinite; }
+        .welcome-text { font-size: 1.5rem; margin-bottom: 20px; opacity: 0.9; }
+
+        .welcome-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b6b 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .welcome-btn:hover { transform: scale(1.1); }
+        .welcome-hint { margin-top: 30px; font-size: 0.9rem; opacity: 0.5; animation: blink 1.5s ease-in-out infinite; }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes glow { 0%, 100% { box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4); } 50% { box-shadow: 0 15px 60px rgba(233, 69, 96, 0.7); } }
+        @keyframes blink { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        .main-content { opacity: 0; transition: opacity 0.5s ease; }
+        .main-content.visible { opacity: 1; }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .site-title { text-align: center; margin-bottom: 25px; }
+        .site-title h1 { font-size: 2.5rem; color: var(--accent-color); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .slides { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; max-height: 350px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
+        .slide img { max-width: 100%; max-height: 350px; object-fit: contain; }
+
+        .placeholder-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-width: 100%;
+            height: 350px;
+        }
+        .placeholder-slide i { font-size: 5rem; opacity: 0.5; }
+
+        .slide-indicators { text-align: center; padding: 15px; background: rgba(0,0,0,0.3); }
+        .indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); margin: 0 5px; cursor: pointer; }
+        .indicator.active { background: var(--accent-color); transform: scale(1.2); }
+
+        .slide-controls { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none; }
+        .slide-btn { background: rgba(0,0,0,0.5); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; pointer-events: all; }
+        .slide-btn:hover { background: var(--accent-color); }
+
+        .spotify-section {
+            background: linear-gradient(135deg, #1DB954 0%, #191414 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 40px rgba(29, 185, 84, 0.3);
+        }
+
+        .spotify-icon { font-size: 2.5rem; color: #1DB954; background: #000; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .spotify-info { flex-grow: 1; }
+        .spotify-info .label { font-size: 0.85rem; opacity: 0.8; }
+        .spotify-info .track-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; }
+        .spotify-link { display: inline-flex; align-items: center; gap: 8px; background: #1DB954; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; }
+        .spotify-embed { width: 100%; margin-top: 10px; border-radius: 12px; }
+        .spotify-embed iframe { border-radius: 12px; height: 80px; }
+
+        .equalizer { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-left: auto; }
+        .bar { width: 5px; background: #1DB954; border-radius: 3px; animation: equalize 0.5s ease infinite alternate; }
+        .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 15px; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 25px; animation-delay: 0.3s; }
+        .bar:nth-child(5) { height: 12px; animation-delay: 0.4s; }
+
+        @keyframes equalize { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+
+        .message-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .message-section p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
+
+        .decoration { position: fixed; font-size: 2rem; opacity: 0.1; pointer-events: none; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+
+        .confetti { position: fixed; width: 10px; height: 10px; top: -10px; animation: confettiFall linear forwards; pointer-events: none; }
+        @keyframes confettiFall { to { top: 100vh; transform: rotate(720deg); } }
+
+        @media (max-width: 768px) {
+            .site-title h1 { font-size: 2rem; }
+            .spotify-section { flex-direction: column; text-align: center; }
+            .equalizer { margin: 15px auto 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Boas-vindas -->
+    <div class="welcome-screen" id="welcome-screen" onclick="enterSite()">
+        <div class="welcome-content">
+            <div class="welcome-icon">🎉</div>
+            <p class="welcome-text">Você recebeu uma surpresa especial!</p>
+            <button class="welcome-btn">
+                <i class="fas fa-play"></i> Clique Aqui
+            </button>
+            <p class="welcome-hint">Toque para ver sua surpresa</p>
+        </div>
+    </div>
+
+    <div id="decorations"></div>
+
+    <div class="container main-content" id="main-content">
+        <section class="site-title">
+            <h1>FELIZ ANIVERSÁRIO MACAQUINHA  🐵🎉</h1>
+        </section>
+
+        <section class="slideshow-container">
+            <div class="slides" id="slides">
+                
+                <div class="slide">
+                    <img src="foto1.jpg" alt="Foto 1">
+                </div>
+                <div class="slide">
+                    <img src="foto2.jpg" alt="Foto 2">
+                </div>
+            </div>
+            <div class="slide-controls">
+                <button class="slide-btn prev" onclick="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slide-btn next" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="slide-indicators" id="slide-indicators">
+                <span class="indicator active" onclick="goToSlide(0)"></span><span class="indicator" onclick="goToSlide(1)"></span>
+            </div>
+        </section>
+
+        
+
+        <section class="message-section">
+            <p>Primeiramente queria desejar um feliz aniversário para você e queria te lembrar a pessoa incrivel que você é, sei que a gente brigou bastante esses tempos, mas você foi alguém que eu gostei de conhecer e ter por perto, eu espero muito que você continue sendo essa pessoa foda que tu é e que dê tudo certo na sua vida pois eu tenho certeza que vai dar certo, eu sou ruim com textos, mas eu queria fazer isso de coração, espero que você fique bem e aproveite seu aniversário, FELIZ ANIVERSÁRIO MACAQUINHA 🐵</p>
+        </section>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 2;
+        const slideSpeed = 5000;
+        const spotifyTrackId = '';
+        let hasEntered = false;
+
+        function enterSite() {
+            if (hasEntered) return;
+            hasEntered = true;
+
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('main-content').classList.add('visible');
+            
+            createConfetti();
+            
+            if (spotifyTrackId) {
+                document.getElementById('spotify-embed').innerHTML = 
+                    '<iframe src="https://open.spotify.com/embed/track/' + spotifyTrackId + '?utm_source=generator&theme=0&autoplay=1" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+            }
+            
+            setInterval(nextSlide, slideSpeed);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            document.getElementById('slides').style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            document.querySelectorAll('.indicator').forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // Decorações
+        const emojis = ['🎈', '🎉', '🎊', '⭐', '✨', '💖', '🎁', '🌟'];
+        const decorations = document.getElementById('decorations');
+        for (let i = 0; i < 15; i++) {
+            const dec = document.createElement('div');
+            dec.className = 'decoration';
+            dec.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            dec.style.left = Math.random() * 100 + 'vw';
+            dec.style.top = Math.random() * 100 + 'vh';
+            dec.style.animationDelay = Math.random() * 5 + 's';
+            decorations.appendChild(dec);
+        }
+
+        function createConfetti() {
+            const colors = ['#e94560', '#f39c12', '#9b59b6', '#3498db', '#2ecc71'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
