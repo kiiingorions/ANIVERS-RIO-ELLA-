@@ -744,8 +744,10 @@
 
         // Carregar configuração do localStorage
         function loadFromLocalStorage() {
-            const saved = localStorage.getItem('siteConfig');
             console.log('Carregando configuração...');
+            
+            // Limpar localStorage antigo para não sobrescrever nada!
+            localStorage.removeItem('siteConfig');
             
             // SEMPRE usar o arquivo de música direto (funciona no GitHub Pages!)
             musicData = 'musica-aniversario.mp3';
@@ -756,17 +758,7 @@
             renderSlides();
             startSlideshow();
             
-            if (saved) {
-                try {
-                    const config = JSON.parse(saved);
-                    console.log('Config carregada do localStorage');
-                    updateSiteConfig(config);
-                } catch (e) {
-                    console.log('Erro ao carregar configuração:', e);
-                }
-            } else {
-                console.log('Usando configuração padrão');
-            }
+            console.log('Usando configuração fixa do HTML');
         }
 
         // Receber mensagens do dashboard
