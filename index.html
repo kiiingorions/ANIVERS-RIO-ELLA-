@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FELIZ ANIVERSÁRIO MACAQUINHA  🐵🎉</title>
+    <title id="page-title">Feliz Aniversário! 🎉</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --bg-color: #1a1a2e;
-            --text-color: #ffffff;
-            --accent-color: #e94560;
+    <style id="dynamic-styles">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-color, #1a1a2e);
+            color: var(--text-color, #ffffff);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -45,9 +43,23 @@
             pointer-events: none;
         }
 
-        .welcome-content { text-align: center; }
-        .welcome-icon { font-size: 5rem; margin-bottom: 30px; animation: bounce 1s ease infinite; }
-        .welcome-text { font-size: 1.5rem; margin-bottom: 20px; opacity: 0.9; }
+        .welcome-content {
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .welcome-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            animation: bounce 1s ease infinite;
+        }
+
+        .welcome-text {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
 
         .welcome-btn {
             display: inline-flex;
@@ -61,19 +73,57 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
+            transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4);
             animation: glow 2s ease-in-out infinite;
         }
 
-        .welcome-btn:hover { transform: scale(1.1); }
-        .welcome-hint { margin-top: 30px; font-size: 0.9rem; opacity: 0.5; animation: blink 1.5s ease-in-out infinite; }
+        .welcome-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(233, 69, 96, 0.6);
+        }
 
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @keyframes glow { 0%, 100% { box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4); } 50% { box-shadow: 0 15px 60px rgba(233, 69, 96, 0.7); } }
-        @keyframes blink { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .welcome-hint {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            animation: blink 1.5s ease-in-out infinite;
+        }
 
-        .main-content { opacity: 0; transition: opacity 0.5s ease; }
-        .main-content.visible { opacity: 1; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4); }
+            50% { box-shadow: 0 15px 60px rgba(233, 69, 96, 0.7); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --accent-color: #e94560;
+        }
 
         .container {
             max-width: 800px;
@@ -81,9 +131,85 @@
             padding: 20px 15px;
         }
 
-        .site-title { text-align: center; margin-bottom: 25px; }
-        .site-title h1 { font-size: 2.5rem; color: var(--accent-color); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        /* Título */
+        .site-title {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease;
+        }
 
+        .site-title h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        /* Seção de Música Tocando */
+        .music-playing-section {
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .music-playing-icon {
+            font-size: 1.8rem;
+            color: white;
+            background: rgba(0,0,0,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-playing-info {
+            flex-grow: 1;
+        }
+
+        .music-playing-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .music-playing-name {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .music-playing-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 25px;
+        }
+
+        .music-bar {
+            width: 4px;
+            background: white;
+            border-radius: 2px;
+            animation: musicEqualize 0.5s ease infinite alternate;
+        }
+
+        .music-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .music-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+        .music-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+        .music-bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+        .music-bar:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+        @keyframes musicEqualize {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1); }
+        }
+
+        /* Slideshow de Fotos */
         .slideshow-container {
             position: relative;
             width: 100%;
@@ -92,11 +218,28 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: fadeIn 1.5s ease;
         }
 
-        .slides { display: flex; transition: transform 0.5s ease-in-out; }
-        .slide { min-width: 100%; max-height: 350px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
-        .slide img { max-width: 100%; max-height: 350px; object-fit: contain; }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            max-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+        }
 
         .placeholder-slide {
             display: flex;
@@ -106,16 +249,66 @@
             min-width: 100%;
             height: 350px;
         }
-        .placeholder-slide i { font-size: 5rem; opacity: 0.5; }
 
-        .slide-indicators { text-align: center; padding: 15px; background: rgba(0,0,0,0.3); }
-        .indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); margin: 0 5px; cursor: pointer; }
-        .indicator.active { background: var(--accent-color); transform: scale(1.2); }
+        .placeholder-slide i {
+            font-size: 5rem;
+            opacity: 0.5;
+        }
 
-        .slide-controls { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none; }
-        .slide-btn { background: rgba(0,0,0,0.5); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; pointer-events: all; }
-        .slide-btn:hover { background: var(--accent-color); }
+        /* Indicadores do Slideshow */
+        .slide-indicators {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+        }
 
+        .indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Controles do Slideshow */
+        .slide-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            pointer-events: none;
+        }
+
+        .slide-btn {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            pointer-events: all;
+        }
+
+        .slide-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Seção do Spotify */
         .spotify-section {
             background: linear-gradient(135deg, #1DB954 0%, #191414 100%);
             border-radius: 20px;
@@ -124,44 +317,252 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            animation: fadeInUp 1s ease 0.5s both;
             box-shadow: 0 10px 40px rgba(29, 185, 84, 0.3);
         }
 
-        .spotify-icon { font-size: 2.5rem; color: #1DB954; background: #000; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .spotify-info { flex-grow: 1; }
-        .spotify-info .label { font-size: 0.85rem; opacity: 0.8; }
-        .spotify-info .track-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; }
-        .spotify-link { display: inline-flex; align-items: center; gap: 8px; background: #1DB954; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; }
-        .spotify-embed { width: 100%; margin-top: 10px; border-radius: 12px; }
-        .spotify-embed iframe { border-radius: 12px; height: 80px; }
+        .spotify-icon {
+            font-size: 2.5rem;
+            color: #1DB954;
+            background: #000;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-        .equalizer { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-left: auto; }
-        .bar { width: 5px; background: #1DB954; border-radius: 3px; animation: equalize 0.5s ease infinite alternate; }
+        .spotify-info {
+            flex-grow: 1;
+        }
+
+        .spotify-info .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 3px;
+        }
+
+        .spotify-info .track-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1DB954;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .spotify-link:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.5);
+        }
+
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 30px;
+            margin-left: auto;
+        }
+
+        .bar {
+            width: 5px;
+            background: #1DB954;
+            border-radius: 3px;
+            animation: equalize 0.5s ease infinite alternate;
+        }
+
         .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
         .bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
         .bar:nth-child(3) { height: 15px; animation-delay: 0.2s; }
         .bar:nth-child(4) { height: 25px; animation-delay: 0.3s; }
         .bar:nth-child(5) { height: 12px; animation-delay: 0.4s; }
 
-        @keyframes equalize { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+        @keyframes equalize {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1); }
+        }
 
-        .message-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-        .message-section p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
+        /* Spotify Embed */
+        .spotify-embed {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
-        .decoration { position: fixed; font-size: 2rem; opacity: 0.1; pointer-events: none; animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+        .spotify-embed iframe {
+            border-radius: 12px;
+            height: 152px;
+        }
 
-        .confetti { position: fixed; width: 10px; height: 10px; top: -10px; animation: confettiFall linear forwards; pointer-events: none; }
-        @keyframes confettiFall { to { top: 100vh; transform: rotate(720deg); } }
+        .spotify-section {
+            position: relative;
+        }
 
+        .spotify-section.highlight {
+            animation: pulseSpotify 1.5s ease-in-out 3;
+            box-shadow: 0 0 30px rgba(29, 185, 84, 0.8);
+        }
+
+        .spotify-section.highlight::after {
+            content: '🎵 Aperte o play!';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1DB954;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes pulseSpotify {
+            0%, 100% { box-shadow: 0 10px 40px rgba(29, 185, 84, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(29, 185, 84, 0.9); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Mensagem Personalizada */
+        .message-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            animation: fadeInUp 1s ease 1s both;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .message-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        /* Decorações */
+        .decoration {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Confetes */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confettiFall linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            to {
+                top: 100vh;
+                transform: rotate(720deg);
+            }
+        }
+
+        /* Responsivo */
         @media (max-width: 768px) {
-            .site-title h1 { font-size: 2rem; }
-            .spotify-section { flex-direction: column; text-align: center; }
-            .equalizer { margin: 15px auto 0; }
+            .site-title h1 {
+                font-size: 2rem;
+            }
+
+            .spotify-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .equalizer {
+                margin: 15px auto 0;
+            }
+
+            .message-section {
+                padding: 25px;
+            }
+
+            .message-section p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Imagem de Fundo */
+        .bg-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
+    <!-- Imagem de Fundo -->
+    <div class="bg-image-container" id="bg-image-container"></div>
+
     <!-- Tela de Boas-vindas -->
     <div class="welcome-screen" id="welcome-screen" onclick="enterSite()">
         <div class="welcome-content">
@@ -174,21 +575,41 @@
         </div>
     </div>
 
-    <div id="decorations"></div>
+    <!-- Decorações de fundo -->
+    <div class="decorations" id="decorations"></div>
+
+    <!-- Áudio para tocar automaticamente -->
+    <audio id="background-music" loop></audio>
 
     <div class="container main-content" id="main-content">
+        <!-- Título -->
         <section class="site-title">
-            <h1>FELIZ ANIVERSÁRIO MACAQUINHA  🐵🎉</h1>
+            <h1 id="main-title">Feliz Aniversário! 🎉</h1>
         </section>
 
-        <section class="slideshow-container">
+        <!-- Seção de Música Tocando -->
+        <section class="music-playing-section" id="music-playing-section" style="display: none;">
+            <div class="music-playing-icon">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="music-playing-info">
+                <div class="music-playing-label">🎵 Tocando agora</div>
+                <div class="music-playing-name" id="music-playing-name">Música</div>
+            </div>
+            <div class="music-playing-bars">
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+            </div>
+        </section>
+
+        <!-- Slideshow de Fotos -->
+        <section class="slideshow-container" id="slideshow-container">
             <div class="slides" id="slides">
-                
-                <div class="slide">
-                    <img src="foto1.jpg" alt="Foto 1">
-                </div>
-                <div class="slide">
-                    <img src="foto2.jpg" alt="Foto 2">
+                <div class="placeholder-slide">
+                    <i class="fas fa-images"></i>
                 </div>
             </div>
             <div class="slide-controls">
@@ -199,79 +620,338 @@
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
-            <div class="slide-indicators" id="slide-indicators">
-                <span class="indicator active" onclick="goToSlide(0)"></span><span class="indicator" onclick="goToSlide(1)"></span>
+            <div class="slide-indicators" id="slide-indicators"></div>
+        </section>
+
+        <!-- Seção do Spotify (botão para abrir) -->
+        <section class="spotify-section" id="spotify-section" style="display: none;">
+            <div class="spotify-icon">
+                <i class="fab fa-spotify"></i>
+            </div>
+            <div class="spotify-info">
+                <div class="label">🎵 Quer ouvir no Spotify?</div>
+                <a href="#" class="spotify-link" id="spotify-open-link" target="_blank">
+                    <i class="fab fa-spotify"></i> Abrir no Spotify
+                </a>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </section>
 
-        
-
+        <!-- Mensagem Personalizada -->
         <section class="message-section">
-            <p>Primeiramente queria desejar um feliz aniversário para você e queria te lembrar a pessoa incrivel que você é, sei que a gente brigou bastante esses tempos, mas você foi alguém que eu gostei de conhecer e ter por perto, eu espero muito que você continue sendo essa pessoa foda que tu é e que dê tudo certo na sua vida pois eu tenho certeza que vai dar certo, eu sou ruim com textos, mas eu queria fazer isso de coração, espero que você fique bem e aproveite seu aniversário, FELIZ ANIVERSÁRIO MACAQUINHA 🐵</p>
+            <p id="custom-message">Que esse dia seja repleto de alegria, amor e muitas felicidades! 
+
+Você é uma pessoa incrível e merece todo o carinho do mundo. 
+
+Com muito amor! ❤️</p>
         </section>
     </div>
 
     <script>
+        // Variáveis do slideshow
         let currentSlide = 0;
-        const totalSlides = 2;
-        const slideSpeed = 5000;
-        const spotifyTrackId = '';
+        let slideInterval;
+        let slideSpeed = 3000;
+        let images = [];
         let hasEntered = false;
+        let spotifyTrackId = null;
+        let musicData = null;
+        let musicName = null;
 
+        // Função para entrar no site
         function enterSite() {
             if (hasEntered) return;
             hasEntered = true;
 
+            // Esconder tela de boas-vindas
             document.getElementById('welcome-screen').classList.add('hidden');
+            
+            // Mostrar conteúdo principal
             document.getElementById('main-content').classList.add('visible');
             
+            // Criar confetes após entrar
             createConfetti();
             
-            if (spotifyTrackId) {
-                document.getElementById('spotify-embed').innerHTML = 
-                    '<iframe src="https://open.spotify.com/embed/track/' + spotifyTrackId + '?utm_source=generator&theme=0&autoplay=1" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+            // Tocar música MP3 automaticamente (funciona após clique!)
+            if (musicData) {
+                playBackgroundMusic();
             }
             
-            setInterval(nextSlide, slideSpeed);
+            // Mostrar Spotify se tiver (como botão extra)
+            if (spotifyTrackId) {
+                showSpotifySection(spotifyTrackId);
+            }
         }
 
+        // Tocar música de fundo MP3
+        function playBackgroundMusic() {
+            const audio = document.getElementById('background-music');
+            const musicSection = document.getElementById('music-playing-section');
+            const musicNameEl = document.getElementById('music-playing-name');
+            
+            console.log('Tentando tocar música...');
+            console.log('musicData existe:', !!musicData);
+            
+            if (!musicData) {
+                console.log('ERRO: musicData está vazio!');
+                return;
+            }
+            
+            audio.src = musicData;
+            audio.volume = 0.7;
+            
+            // Mostrar seção de música imediatamente
+            musicSection.style.display = 'flex';
+            musicNameEl.textContent = musicName || 'Música especial';
+            
+            // Tocar automaticamente após o clique do usuário!
+            audio.play().then(() => {
+                console.log('Música tocando com sucesso!');
+            }).catch(err => {
+                console.log('Erro ao tocar música:', err);
+                musicNameEl.textContent = 'Erro ao carregar música';
+            });
+        }
+
+        // Mostrar seção do Spotify como botão extra
+        function showSpotifySection(trackId) {
+            const spotifySection = document.getElementById('spotify-section');
+            const openLink = document.getElementById('spotify-open-link');
+            
+            spotifySection.style.display = 'flex';
+            openLink.href = `https://open.spotify.com/track/${trackId}`;
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            createDecorations();
+            
+            // Verificar se está em modo preview (dentro do iframe do dashboard)
+            if (window.parent !== window) {
+                window.addEventListener('message', handleMessage);
+                // No preview, já mostrar o conteúdo
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('main-content').classList.add('visible');
+                hasEntered = true;
+                createConfetti();
+            } else {
+                // Aberto diretamente - carregar do localStorage
+                loadFromLocalStorage();
+            }
+        });
+
+        // Carregar configuração do localStorage
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('siteConfig');
+            console.log('Carregando configuração...');
+            
+            // SEMPRE usar o arquivo de música direto (funciona no GitHub Pages!)
+            musicData = 'musica-aniversario.mp3';
+            musicName = 'Like You Do';
+            
+            // Carregar as fotos diretamente (funciona no GitHub Pages!)
+            images = ['foto1.jpg', 'foto2.jpg'];
+            renderSlides();
+            startSlideshow();
+            
+            if (saved) {
+                try {
+                    const config = JSON.parse(saved);
+                    console.log('Config carregada do localStorage');
+                    updateSiteConfig(config);
+                } catch (e) {
+                    console.log('Erro ao carregar configuração:', e);
+                }
+            } else {
+                console.log('Usando configuração padrão');
+            }
+        }
+
+        // Receber mensagens do dashboard
+        function handleMessage(event) {
+            const data = event.data;
+            if (data.type === 'updateConfig') {
+                updateSiteConfig(data.config);
+            }
+        }
+
+        // Atualizar configuração do site
+        function updateSiteConfig(config) {
+            // Atualizar título
+            if (config.title) {
+                document.getElementById('main-title').textContent = config.title;
+                document.getElementById('page-title').textContent = config.title;
+            }
+
+            // Atualizar cores
+            if (config.bgColor) {
+                document.documentElement.style.setProperty('--bg-color', config.bgColor);
+                document.body.style.backgroundColor = config.bgColor;
+            }
+            if (config.textColor) {
+                document.documentElement.style.setProperty('--text-color', config.textColor);
+                document.body.style.color = config.textColor;
+            }
+            if (config.accentColor) {
+                document.documentElement.style.setProperty('--accent-color', config.accentColor);
+            }
+
+            // Atualizar música
+            if (config.musicData) {
+                musicData = config.musicData;
+                musicName = config.musicName;
+            }
+
+            // Atualizar imagens
+            if (config.images && config.images.length > 0) {
+                images = config.images;
+                renderSlides();
+                startSlideshow();
+            }
+
+            // Atualizar velocidade do slideshow
+            if (config.slideSpeed) {
+                slideSpeed = config.slideSpeed * 1000;
+                if (images.length > 0) {
+                    startSlideshow();
+                }
+            }
+
+            // Atualizar Spotify
+            if (config.spotifyLink) {
+                updateSpotify(config.spotifyLink);
+            } else {
+                document.getElementById('spotify-section').style.display = 'none';
+            }
+
+            // Atualizar texto
+            if (config.customText) {
+                document.getElementById('custom-message').textContent = config.customText;
+            }
+
+            // Atualizar imagem de fundo
+            updateBackgroundImage(config.bgImage, config.bgOpacity);
+        }
+
+        // Atualizar imagem de fundo
+        function updateBackgroundImage(bgImage, opacity) {
+            const container = document.getElementById('bg-image-container');
+            
+            if (bgImage) {
+                const opacityValue = (opacity || 30) / 100;
+                container.innerHTML = `<img src="${bgImage}" alt="Fundo" style="opacity: ${opacityValue}">`;
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        // Renderizar slides
+        function renderSlides() {
+            const slidesContainer = document.getElementById('slides');
+            const indicatorsContainer = document.getElementById('slide-indicators');
+            
+            slidesContainer.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+
+            images.forEach((img, index) => {
+                // Criar slide
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                const imgEl = document.createElement('img');
+                imgEl.src = img;
+                imgEl.alt = `Foto ${index + 1}`;
+                slide.appendChild(imgEl);
+                slidesContainer.appendChild(slide);
+
+                // Criar indicador
+                const indicator = document.createElement('span');
+                indicator.className = 'indicator' + (index === 0 ? ' active' : '');
+                indicator.onclick = () => goToSlide(index);
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            currentSlide = 0;
+            updateSlidePosition();
+        }
+
+        // Controles do slideshow
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlide();
+            currentSlide = (currentSlide + 1) % images.length;
+            updateSlidePosition();
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlide();
+            currentSlide = (currentSlide - 1 + images.length) % images.length;
+            updateSlidePosition();
         }
 
         function goToSlide(index) {
             currentSlide = index;
-            updateSlide();
+            updateSlidePosition();
         }
 
-        function updateSlide() {
-            document.getElementById('slides').style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-            document.querySelectorAll('.indicator').forEach((ind, i) => {
-                ind.classList.toggle('active', i === currentSlide);
+        function updateSlidePosition() {
+            const slides = document.getElementById('slides');
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Atualizar indicadores
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((ind, index) => {
+                ind.classList.toggle('active', index === currentSlide);
             });
         }
 
-        // Decorações
-        const emojis = ['🎈', '🎉', '🎊', '⭐', '✨', '💖', '🎁', '🌟'];
-        const decorations = document.getElementById('decorations');
-        for (let i = 0; i < 15; i++) {
-            const dec = document.createElement('div');
-            dec.className = 'decoration';
-            dec.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-            dec.style.left = Math.random() * 100 + 'vw';
-            dec.style.top = Math.random() * 100 + 'vh';
-            dec.style.animationDelay = Math.random() * 5 + 's';
-            decorations.appendChild(dec);
+        function startSlideshow() {
+            clearInterval(slideInterval);
+            if (images.length > 1) {
+                slideInterval = setInterval(nextSlide, slideSpeed);
+            }
         }
 
+        // Atualizar Spotify
+        function updateSpotify(link) {
+            const spotifySection = document.getElementById('spotify-section');
+            const openLink = document.getElementById('spotify-open-link');
+            
+            // Extrair ID da track
+            const trackMatch = link.match(/track\/([a-zA-Z0-9]+)/);
+            if (trackMatch) {
+                spotifyTrackId = trackMatch[1];
+                openLink.href = link;
+                
+                // Mostrar seção se já entrou no site
+                if (hasEntered) {
+                    spotifySection.style.display = 'flex';
+                }
+            }
+        }
+
+        // Criar decorações
+        function createDecorations() {
+            const decorations = document.getElementById('decorations');
+            const emojis = ['🎈', '🎉', '🎊', '⭐', '✨', '💖', '🎁', '🌟'];
+            
+            for (let i = 0; i < 15; i++) {
+                const dec = document.createElement('div');
+                dec.className = 'decoration';
+                dec.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                dec.style.left = Math.random() * 100 + 'vw';
+                dec.style.top = Math.random() * 100 + 'vh';
+                dec.style.animationDelay = Math.random() * 5 + 's';
+                decorations.appendChild(dec);
+            }
+        }
+
+        // Criar confetes
         function createConfetti() {
-            const colors = ['#e94560', '#f39c12', '#9b59b6', '#3498db', '#2ecc71'];
+            const colors = ['#e94560', '#f39c12', '#9b59b6', '#3498db', '#2ecc71', '#e74c3c'];
+            
             for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
@@ -281,6 +961,7 @@
                     confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
                     document.body.appendChild(confetti);
+                    
                     setTimeout(() => confetti.remove(), 5000);
                 }, i * 100);
             }
@@ -288,4 +969,6 @@
     </script>
 </body>
 </html>
+
+
 
