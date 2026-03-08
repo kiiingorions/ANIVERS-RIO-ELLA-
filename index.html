@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Feliz Aniversário! 🎉</title>
+    <title id="page-title">FELIZ ANIVERSÁRIO MACAQUINHA 🐵</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style id="dynamic-styles">
         * {
@@ -584,7 +584,7 @@
     <div class="container main-content" id="main-content">
         <!-- Título -->
         <section class="site-title">
-            <h1 id="main-title">Feliz Aniversário! 🎉</h1>
+            <h1 id="main-title">FELIZ ANIVERSÁRIO MACAQUINHA 🐵</h1>
         </section>
 
         <!-- Seção de Música Tocando -->
@@ -645,11 +645,7 @@
 
         <!-- Mensagem Personalizada -->
         <section class="message-section">
-            <p id="custom-message">Que esse dia seja repleto de alegria, amor e muitas felicidades! 
-
-Você é uma pessoa incrível e merece todo o carinho do mundo. 
-
-Com muito amor! ❤️</p>
+            <p id="custom-message">Primeiramente queria desejar um feliz aniversário para você e queria te lembrar a pessoa incrivel que você é, sei que a gente brigou bastante esses tempos, mas você foi alguém que eu gostei de conhecer e ter por perto, eu espero muito que você continue sendo essa pessoa foda que tu é e que dê tudo certo na sua vida pois eu tenho certeza que vai dar certo, eu sou ruim com textos, mas eu queria fazer isso de coração, espero que você fique bem e aproveite seu aniversário, FELIZ ANIVERSÁRIO MACAQUINHA 🐵</p>
         </section>
     </div>
 
@@ -783,11 +779,7 @@ Com muito amor! ❤️</p>
 
         // Atualizar configuração do site
         function updateSiteConfig(config) {
-            // Atualizar título
-            if (config.title) {
-                document.getElementById('main-title').textContent = config.title;
-                document.getElementById('page-title').textContent = config.title;
-            }
+            // Título já está definido no HTML - não sobrescrever!
 
             // Atualizar cores
             if (config.bgColor) {
@@ -830,10 +822,7 @@ Com muito amor! ❤️</p>
                 document.getElementById('spotify-section').style.display = 'none';
             }
 
-            // Atualizar texto
-            if (config.customText) {
-                document.getElementById('custom-message').textContent = config.customText;
-            }
+            // Texto já está definido no HTML - não sobrescrever!
 
             // Atualizar imagem de fundo
             updateBackgroundImage(config.bgImage, config.bgOpacity);
@@ -969,4 +958,3 @@ Com muito amor! ❤️</p>
     </script>
 </body>
 </html>
-
