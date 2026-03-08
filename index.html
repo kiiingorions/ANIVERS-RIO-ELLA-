@@ -116,39 +116,61 @@
         .slide-btn { background: rgba(0,0,0,0.5); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; pointer-events: all; }
         .slide-btn:hover { background: var(--accent-color); }
 
-        /* Estilo do botão de música */
-        #music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 15px;
-            background: #e94560;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-        }
-        #music-toggle:hover {
-            transform: scale(1.1);
-            background: #ff6b6b;
+        .spotify-section {
+            background: linear-gradient(135deg, #1DB954 0%, #191414 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 40px rgba(29, 185, 84, 0.3);
         }
 
-        /* ... (o resto do seu CSS continua igual, incluindo .spotify-section se tiver) */
+        .spotify-icon { font-size: 2.5rem; color: #1DB954; background: #000; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .spotify-info { flex-grow: 1; }
+        .spotify-info .label { font-size: 0.85rem; opacity: 0.8; }
+        .spotify-info .track-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; }
+        .spotify-link { display: inline-flex; align-items: center; gap: 8px; background: #1DB954; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; }
+        .spotify-embed { width: 100%; margin-top: 10px; border-radius: 12px; }
+        .spotify-embed iframe { border-radius: 12px; height: 80px; }
+
+        .equalizer { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-left: auto; }
+        .bar { width: 5px; background: #1DB954; border-radius: 3px; animation: equalize 0.5s ease infinite alternate; }
+        .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 15px; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 25px; animation-delay: 0.3s; }
+        .bar:nth-child(5) { height: 12px; animation-delay: 0.4s; }
+
+        @keyframes equalize { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+
+        .message-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .message-section p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
+
+        .decoration { position: fixed; font-size: 2rem; opacity: 0.1; pointer-events: none; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+
+        .confetti { position: fixed; width: 10px; height: 10px; top: -10px; animation: confettiFall linear forwards; pointer-events: none; }
+        @keyframes confettiFall { to { top: 100vh; transform: rotate(720deg); } }
+
+        @media (max-width: 768px) {
+            .site-title h1 { font-size: 2rem; }
+            .spotify-section { flex-direction: column; text-align: center; }
+            .equalizer { margin: 15px auto 0; }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Tela de boas-vindas (clique para entrar) -->
+    <!-- Tela de Boas-vindas -->
     <div class="welcome-screen" id="welcome-screen" onclick="enterSite()">
         <div class="welcome-content">
-            <div class="welcome-icon">🎉🐵</div>
-            <h2 class="welcome-text">Clique para entrar no aniversário da Macaquinha!</h2>
-            <button class="welcome-btn">Entrar 🎂</button>
-            <p class="welcome-hint">Toque na tela para começar ✨</p>
+            <div class="welcome-icon">🎉</div>
+            <p class="welcome-text">Você recebeu uma surpresa especial!</p>
+            <button class="welcome-btn">
+                <i class="fas fa-play"></i> Clique Aqui
+            </button>
+            <p class="welcome-hint">Toque para ver sua surpresa</p>
         </div>
     </div>
 
@@ -161,6 +183,7 @@
 
         <section class="slideshow-container">
             <div class="slides" id="slides">
+                
                 <div class="slide">
                     <img src="foto1.jpg" alt="Foto 1">
                 </div>
@@ -177,24 +200,16 @@
                 </button>
             </div>
             <div class="slide-indicators" id="slide-indicators">
-                <span class="indicator active" onclick="goToSlide(0)"></span>
-                <span class="indicator" onclick="goToSlide(1)"></span>
+                <span class="indicator active" onclick="goToSlide(0)"></span><span class="indicator" onclick="goToSlide(1)"></span>
             </div>
         </section>
+
+        
 
         <section class="message-section">
             <p>Primeiramente queria desejar um feliz aniversário para você e queria te lembrar a pessoa incrivel que você é, sei que a gente brigou bastante esses tempos, mas você foi alguém que eu gostei de conhecer e ter por perto, eu espero muito que você continue sendo essa pessoa foda que tu é e que dê tudo certo na sua vida pois eu tenho certeza que vai dar certo, eu sou ruim com textos, mas eu queria fazer isso de coração, espero que você fique bem e aproveite seu aniversário, FELIZ ANIVERSÁRIO MACAQUINHA 🐵</p>
         </section>
     </div>
-
-    <!-- ÁUDIO DE FUNDO -->
-    <audio id="background-music" loop preload="auto">
-        <source src="Like You_Do_spotdown.org.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
-    </audio>
-
-    <!-- Botão de controle da música -->
-    <button id="music-toggle">🎵</button>
 
     <script>
         let currentSlide = 0;
@@ -202,29 +217,6 @@
         const slideSpeed = 5000;
         const spotifyTrackId = '';
         let hasEntered = false;
-
-        const audio = document.getElementById('background-music');
-        const toggleBtn = document.getElementById('music-toggle');
-
-        // Função para tentar tocar a música
-        function playMusic() {
-            audio.volume = 0.4; // volume baixo inicial
-            audio.play().catch(error => {
-                console.log("Autoplay bloqueado pelo navegador:", error);
-                // O botão permite ativar manualmente se necessário
-            });
-        }
-
-        // Toggle play/pause
-        toggleBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                toggleBtn.textContent = '🔇';
-            } else {
-                audio.pause();
-                toggleBtn.textContent = '🎵';
-            }
-        });
 
         function enterSite() {
             if (hasEntered) return;
@@ -239,9 +231,6 @@
                 document.getElementById('spotify-embed').innerHTML = 
                     '<iframe src="https://open.spotify.com/embed/track/' + spotifyTrackId + '?utm_source=generator&theme=0&autoplay=1" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
             }
-
-            // Tenta tocar a música após interação do usuário
-            playMusic();
             
             setInterval(nextSlide, slideSpeed);
         }
@@ -299,3 +288,4 @@
     </script>
 </body>
 </html>
+
